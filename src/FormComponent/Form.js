@@ -7,6 +7,7 @@ class Form extends React.Component {
   constructor() {
     super();
     this.state = {
+      fullname: "",
       emailid: "",
       mobileno: "",
       age: "",
@@ -20,6 +21,8 @@ class Form extends React.Component {
 
 
   DisplayAge =()=>{ if(this.state.emailid.length > 0) this.setState({showAge:true})}
+
+  handleFullName = (e) => this.setState({ fullname: e.target.value })
 
   handleMobChange = (e) => this.setState({ mobileno: e.target.value })
 
@@ -88,18 +91,25 @@ class Form extends React.Component {
 
 
   render() {
-    const {displayValue, showAge, emailid, mobileno, age}= this.state;
+    const {displayValue, showAge, emailid, mobileno, age, fullname}= this.state;
     return (
 
       <form onSubmit={this.submituserRegistrationForm} >
       
-       <label>Email Id:</label>
+       <label>Full Name:</label>
+          <input type="text"
+            name="fullname"
+            value={fullname} 
+            onChange={this.handleFullName} />
+        <div className="errorMsg">{this.state.errors.fullname}</div>
+      
+      <label>Email Id:</label>
           <input type="text"
             name="emailid"
             value={emailid} 
             onChange={this.handleEmailChange} />
         <div className="errorMsg">{this.state.errors.emailid}</div>
-
+   
         <label>Mobile No:</label>
           <input type="text"
           name="mobileno"
